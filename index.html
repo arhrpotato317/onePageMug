@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>원페이지 쇼핑몰</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<!-- style.css -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="page_wrap">
+
+			<!-- 타이틀 영역 -->
+			<div class="main_title">
+				<img src="images/mug.jpg">
+				<div class="title row">
+					<h1 class="col">수제 머그잔 세트</h1>
+					<p class="col align-self-end">가격: 57,000원/세트</p>
+				</div>
+				<p class="content">당신을 더욱 빛나게 만들어 줄 머그잔. 머그잔 장인이 정성을 담아 만들어낸 머그잔 입니다. 사랑하는 가족, 사랑하는 연인에게 머그잔을 선물해보세요!</p>
+			</div>
+
+			<!-- form 영역 -->
+			<form class="page_form">
+				<div class="form-group row">
+					<label for="name" class="col-sm-3 col-form-label">주문자 이름</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요.">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="count" class="col-sm-3 col-form-label">수량</label>
+					<div class="col-sm-9">
+						<select class="custom-select" id="count">
+							<option selected>--수량을 선택하세요--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="address" class="col-sm-3 col-form-label">주소</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="address" placeholder="주소를 입력해주세요.">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="address2" class="col-sm-3 col-form-label">상세주소</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="phone" class="col-sm-3 col-form-label">전화번호</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="phone" placeholder="전화번호를 입력해주세요.">
+					</div>
+				</div>
+				<div class="btn-center">
+					<button type="submit" class="btn btn-primary">주문하기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
