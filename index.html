@@ -22,6 +22,7 @@
 	<!-- JavaScript -->
 	<script type="text/javascript">
 	// input 입력값 체크
+	var phoneCheck = /^\d{3}-\d{3,4}-\d{4}$/; //휴대폰 번호 정규표현식
 	function order() {
 		if($('#name').val() == '') {
 			alert('이름을 입력해주세요.');
@@ -38,9 +39,12 @@
 		} else if($('#phone').val() == '') {
 			alert('전화번호를 입력해주세요.');
 			$('#phone').focus();
+		} else if(!phoneCheck.test($('#phone').val())) {
+			alert('전화번호를 형식에 맞게 입력해주세요.');
+			$('#phone').focus();
 		}
 	}
-	</script>
+</script>
 </head>
 <body>
 	<div class="container">
@@ -57,7 +61,7 @@
 			</div>
 
 			<!-- form 영역 -->
-			<form class="page_form">
+			<form class="page_form" method="post">
 				<div class="form-group row">
 					<label for="name" class="col-sm-3 col-form-label">주문자 이름</label>
 					<div class="col-sm-9">
@@ -96,9 +100,59 @@
 					</div>
 				</div>
 				<div class="btn-center">
-					<button type="button" class="btn btn-primary" id="btn-order" onclick="order()">주문하기</button>
+					<button type="submit" class="btn btn-dark" onclick="order(); return false">주문하기</button>
 				</div>
 			</form>
+
+			<!-- 테이블 영역 -->
+			<table class="table table-striped page_table">
+				<thead>
+					<tr>
+						<th scope="col" class="table_num">순번</th>
+						<th scope="col">이름</th>
+						<th scope="col" class="table_num">수량</th>
+						<th scope="col">주소</th>
+						<th scope="col">전화번호</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>name01</td>
+						<td>1</td>
+						<td>Sample address01</td>
+						<td>010-000-0000</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>name02</td>
+						<td>2</td>
+						<td>Sample address02</td>
+						<td>010-000-0000</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>name03</td>
+						<td>3</td>
+						<td>Sample address03</td>
+						<td>010-000-0000</td>
+					</tr>
+					<tr>
+						<th scope="row">4</th>
+						<td>name04 name</td>
+						<td>4</td>
+						<td>Sample address04</td>
+						<td>010-0000-0000</td>
+					</tr>
+					<tr>
+						<th scope="row">5</th>
+						<td>name05</td>
+						<td>5</td>
+						<td>Sample address05 longdata test test test</td>
+						<td>010-0000-0000</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

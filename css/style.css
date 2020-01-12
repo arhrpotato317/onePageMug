@@ -57,6 +57,10 @@ html, body {
 }
 
 /*** form 영역 ***/
+.page_form {
+	margin-bottom: 70px;
+}
+
 .page_form .form-group {
 	background-color: #f6f1f0;
 	border: 1px solid #e4dfdf;
@@ -93,4 +97,18 @@ html, body {
 .page_form .btn {
 	background-color: #444;
 	border-color: #444;
+}
+
+/*** table 영역 ***/
+.page_table {
+	font-size: 0.875rem;
+	word-break: break-word;
+}
+
+.page_table .table_num {
+	width: 10%;
+}
+
+.page_table.table-striped tbody tr:nth-of-type(odd) {
+	background-color: #f6f1f0;
 }
