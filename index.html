@@ -44,6 +44,40 @@
 			$('#phone').focus();
 		}
 	}
+
+	// 주문목록 불러오기
+	$(document).ready(function() {
+		$('#order_table tbody').html('');
+		orderTbl();
+	})
+
+	function orderTbl() {
+		var seqNum = 1;
+		$.ajax({
+			type: "GET",
+			url: "http://spartacodingclub.shop/order",
+			data: {},
+			success: function(response) {
+				var orders = response["orders"];
+				for(var i=0; i<orders.length; i++) {
+					makeOrder(seqNum, orders[i]['name'], orders[i]['count'], orders[i]['address'], orders[i]['phone']);
+					seqNum ++;
+				}
+			}
+		})
+	}
+
+	function makeOrder(seq, name, count, address, phone) {
+		let orderHtml = '<tr>\
+							<th scope="row">'+seq+'</th>\
+							<td>'+name+'</td>\
+							<td>'+count+'</td>\
+							<td>'+address+'</td>\
+							<td>'+phone+'</td>\
+						</tr>';
+		$('#order_table tbody').append(orderHtml);			
+	}
+	
 </script>
 </head>
 <body>
@@ -105,7 +139,7 @@
 			</form>
 
 			<!-- 테이블 영역 -->
-			<table class="table table-striped page_table">
+			<table class="table table-striped page_table" id="order_table">
 				<thead>
 					<tr>
 						<th scope="col" class="table_num">순번</th>
@@ -116,41 +150,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>name01</td>
-						<td>1</td>
-						<td>Sample address01</td>
-						<td>010-000-0000</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>name02</td>
-						<td>2</td>
-						<td>Sample address02</td>
-						<td>010-000-0000</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>name03</td>
-						<td>3</td>
-						<td>Sample address03</td>
-						<td>010-000-0000</td>
-					</tr>
-					<tr>
-						<th scope="row">4</th>
-						<td>name04 name</td>
-						<td>4</td>
-						<td>Sample address04</td>
-						<td>010-0000-0000</td>
-					</tr>
-					<tr>
-						<th scope="row">5</th>
-						<td>name05</td>
-						<td>5</td>
-						<td>Sample address05 longdata test test test</td>
-						<td>010-0000-0000</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>
