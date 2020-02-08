@@ -1,0 +1,114 @@
+html, body {
+	font-family: 'Jua', sans-serif;
+	font-weight: lighter;
+	color: #444;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6
+, h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+.page_wrap {
+	width: 500px;
+	margin: 50px auto 100px;
+}
+
+@media (max-width: 500px) {
+	.page_wrap {
+		width: 100%;
+	}
+}
+
+/*** 타이틀 영역 ***/
+.page_wrap .row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.page_wrap .row .col {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.main_title {
+	margin-bottom: 30px;
+}
+
+.main_title img {
+	width: 100%;
+}
+
+.main_title .title {
+	margin: 25px 0 10px;
+}
+
+.main_title .title h1 {
+	font-size: 1.875rem;
+}
+
+.main_title .title p {
+	font-size: 1.125rem;
+}
+
+.main_title .content {
+	font-size: 0.875rem;
+	word-break: keep-all;
+}
+
+/*** form 영역 ***/
+.page_form {
+	margin-bottom: 70px;
+}
+
+.page_form .form-group {
+	background-color: #f6f1f0;
+	border: 1px solid #e4dfdf;
+	border-radius: 3px;
+}
+
+.page_form .col-form-label {
+	font-size: 0.875rem;
+}
+
+.page_form .col-sm-9 {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.page_form .form-control {
+	font-size: 0.875rem;
+}
+
+.page_form .form-control[type="text"]::placeholder {
+	color: #cecece;
+}
+
+.page_form .form-control, .page_form .custom-select {
+	font-size: 0.875rem;
+	border-color: #fff;
+	border-radius: 0;
+}
+
+.page_form .btn-center {
+	text-align: center;
+}
+
+.page_form .btn {
+	background-color: #444;
+	border-color: #444;
+}
+
+/*** table 영역 ***/
+.page_table {
+	font-size: 0.875rem;
+	word-break: break-word;
+}
+
+.page_table .table_num {
+	width: 10%;
+}
+
+.page_table.table-striped tbody tr:nth-of-type(odd) {
+	background-color: #f6f1f0;
+}

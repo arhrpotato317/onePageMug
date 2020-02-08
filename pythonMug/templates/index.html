@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>원페이지 쇼핑몰</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<!-- style.css -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+	
+	<!-- JavaScript -->
+	<script type="text/javascript">
+	// input 입력값 체크 및 API 연결
+	var phoneCheck = /^\d{3}-\d{3,4}-\d{4}$/; //휴대폰 번호 정규표현식
+	function order() {
+		var name = $('#name').val();
+		var count = $('#count').val();
+		var address = $('#address').val();
+		var phone = $('#phone').val();
+
+		if($('#name').val() == '') {
+			alert('이름을 입력해주세요.');
+			$('#name').focus();
+		} else if($('#count').val() == 0) {
+			alert('수량을 선택하세요.');
+			$('#count').focus();
+		} else if($('#address').val() == '') {
+			alert('주소를 입력해주세요.');
+			$('#address').focus();
+		} else if($('#phone').val() == '') {
+			alert('전화번호를 입력해주세요.');
+			$('#phone').focus();
+		} else if(!phoneCheck.test($('#phone').val())) {
+			alert('전화번호를 형식에 맞게 입력해주세요.');
+			$('#phone').focus();
+		}
+
+		$.ajax({
+			type:"POST",
+			url: "/order",
+			data: { name: name, count: count, address: address, phone: phone },
+			 success: function(response) {
+				if(response['result'] == 'success') {
+					alert('주문완료');
+					window.location.reload();
+				}
+			 }
+		})
+	}
+
+	// 주문목록 불러오기 - 주문보기
+	$(document).ready(function() {
+		$('#order_table tbody').html('');
+		orderTbl();
+	})
+
+	function orderTbl() {
+		var seqNum = 1;
+		$.ajax({
+			type: "GET",
+			url: "/order",
+			data: {},
+			success: function(response) {
+				if(response['result'] == 'success') {
+					var all_order = response['all_order'];
+					for(var i=0; i<all_order.length; i++) {
+						makeOrder(seqNum, all_order[i]['name'], all_order[i]['count'], all_order[i]['address'], all_order[i]['phone']);
+						seqNum ++;
+					}
+				} else {
+					alert('주문목록 호출에 실패하였습니다.');
+				}
+			}
+		})
+	}
+
+	function makeOrder(seq, name, count, address, phone) {
+		let orderHtml = '<tr>\
+							<th scope="row">'+seq+'</th>\
+							<td>'+name+'</td>\
+							<td>'+count+'</td>\
+							<td>'+address+'</td>\
+							<td>'+phone+'</td>\
+						</tr>';
+		$('#order_table tbody').append(orderHtml);			
+	}
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="page_wrap">
+
+			<!-- 타이틀 영역 -->
+			<div class="main_title">
+				<img src="../static/images/mug.jpg">
+
+				<div class="title row">
+					<h1 class="col">수제 머그잔 세트</h1>
+					<p class="col align-self-end">가격: 57,000원/세트</p>
+				</div>
+				<p class="content">당신을 더욱 빛나게 만들어 줄 머그잔. 머그잔 장인이 정성을 담아 만들어낸 머그잔 입니다. 사랑하는 가족, 사랑하는 연인에게 머그잔을 선물해보세요!</p>
+			</div>
+
+			<!-- form 영역 -->
+			<form class="page_form" method="post">
+				<div class="form-group row">
+					<label for="name" class="col-sm-3 col-form-label">주문자 이름</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요.">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="count" class="col-sm-3 col-form-label">수량</label>
+					<div class="col-sm-9">
+						<select class="custom-select" id="count">
+							<option value="0" selected>--수량을 선택하세요--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="address" class="col-sm-3 col-form-label">주소</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="address" placeholder="주소를 입력해주세요.">
+					</div>
+				</div>
+				<!-- <div class="form-group row">
+					<label for="address2" class="col-sm-3 col-form-label">상세주소</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+					</div>
+				</div> -->
+				<div class="form-group row">
+					<label for="phone" class="col-sm-3 col-form-label">전화번호</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="phone" placeholder="전화번호를 입력해주세요.">
+					</div>
+				</div>
+				<div class="btn-center">
+					<button type="button" class="btn btn-dark" onclick="order()">주문하기</button>
+				</div>
+			</form>
+
+			<!-- 테이블 영역 -->
+			<table class="table table-striped page_table" id="order_table">
+				<thead>
+					<tr>
+						<th scope="col" class="table_num">순번</th>
+						<th scope="col">이름</th>
+						<th scope="col" class="table_num">수량</th>
+						<th scope="col">주소</th>
+						<th scope="col">전화번호</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
